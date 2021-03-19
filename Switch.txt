@@ -1,0 +1,43 @@
+enable
+configure terminal
+no ip domain-lookup
+hostname SwitchTest
+no cdp run
+service password-encryption
+enable secret ciscosecpa55
+enable password ciscoenapa55
+banner motd * Joi la 15:00 informare desspre bresele de securitate! *
+line console 0
+password ciscoconpa55
+login
+logging synchronous
+exec-timeout 20 20
+exit
+line vty 0 15
+password ciscovtypa55
+login
+logging synchronous
+exec-timeout 20 20
+exit
+exit
+copy running-config startup-config
+clock set 16:14:20 08 March 2021
+configure terminal
+ip domain-name cti.ro
+username Admin01 privilege 15 secret Admin01pa55
+line vty 0 15
+transport input ssh
+login local
+exit
+crypto key generate rsa
+2048
+interface vlan 1
+ip address 177.244.0.2 255.255.248.0
+no shutdown
+exit
+ip default-gateway 177.244.0.1
+end
+copy running-config startup-config
+
+
+  

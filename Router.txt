@@ -1,0 +1,34 @@
+enable
+conf t
+no ip domain-lookup
+hostname RouterTest
+no cdp run
+service password-encryption
+security passwords min-length 10
+login block-for 60 attempts 3 within 30
+enable secret ciscosecpa55
+enable password ciscoenapa55
+banner login * Accesul persoanelor neautorizate este strict interzis! *
+banner motd * Mentenanta joi la 15:00! *
+line console 0
+password ciscoconpa55
+login
+logging synchronous
+exec-timeout 20 20
+exit
+ip domain-name cti.ro
+username Admin01 privilege 15 secret Admin01pa55
+line vty 0 15
+transport input ssh
+login local
+exit
+crypto key generate rsa
+2048
+exit
+copy run start
+
+conf t
+interface giga 0/0
+ip address 177.244.0.3 255.255.248.0
+no shutdown
+exit
